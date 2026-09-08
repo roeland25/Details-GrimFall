@@ -75,6 +75,12 @@ Incorrect:
 AddOns\Details-GrimFall\Details\Details.toc
 ```
 
+## Features
+I've fixed the following things for it to work on GrimFall:
+- Fixed several WoW 3.3.5 UI/API compatibility issues
+- Supports GrimFall's custom/different spell IDs
+- Handles classless/custom specs without crashing
+- Dynamically changes class icon and bar color based on the class contributing the most damage (so we don't see 10x druid in raids)
 
 
 
