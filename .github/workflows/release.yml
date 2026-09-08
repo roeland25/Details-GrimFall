@@ -3,7 +3,13 @@ name: Build WoW Addon ZIP
 on:
   release:
     types: [published]
+
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, bijvoorbeeld v1.0.0"
+        required: true
+        default: "v1.0.0"
 
 permissions:
   contents: write
@@ -34,6 +40,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload "${{ github.event.release.tag_name }}" \
+          TAG="${{ github.event.release.tag_name }}"
+
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          fi
+
+          echo "Uploading to release: $TAG"
+
+          gh release upload "$TAG" \
             Details-GrimFall.zip \
             --clobber
